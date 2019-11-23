@@ -1,0 +1,64 @@
+<button id="logout" style="float:right;margin-top:12px;margin-right: 10px;"
+ [routerLink]="['/dashboard']">
+       Go to Dashboard
+   </button>
+   <button id="logout" style="float:right;margin-top:12px;margin-right: 10px;"
+ [routerLink]="['/favlist']">
+       Go to Favorites List
+   </button>
+
+   <div class="panel panel-info">
+       <div class="panel-heading">
+           <div class="panel-title">Match Details</div>
+       </div>  
+   </div>
+<div>
+
+        <section class="paper-box-container">
+ 
+                <section class="paper-flex-row">
+                  <article class="paper">
+                        <table>
+                                <tr>
+                                  <th>Match Id</th>
+                                  <td>{{match.matchId}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Teams</th>
+                                    <td>{{match.team1}} v {{match.team2}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <td>{{match.date}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Type</th>
+                                    <td>{{match.type}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Stat</th>
+                                    <td>{{match.stat}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Score</th>
+                                    <td>{{match.score}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Has Match Started?</th>
+                                    <td>{{match.matchStarted}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Toss</th>
+                                    <td>{{match.toss_winner_team}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Winner</th>
+                                    <td>{{match.winner_team}}</td>
+                                </tr>
+                        </table>
+                  </article>
+        
+                </section>
+            </section>
+    
+        </div>

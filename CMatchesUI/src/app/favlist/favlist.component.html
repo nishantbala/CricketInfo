@@ -1,0 +1,98 @@
+<app-header></app-header>
+<div>
+    <nav class='navbar navbar-default'>
+        <div class='container-fluid'>
+            <!-- Navigation Bar-->
+            <ul class='nav navbar-nav'>
+                <li><a [routerLink]="['/dashboard']">Dashboard</a></li>
+                <li class="active"><a [routerLink]="['/favlist']">Favourite List</a></li>
+
+            </ul>
+            <div class="nav navbar-nav navbar-right">
+                <p class="navbar-text"><strong>Welcome {{userName}}</strong></p>
+                <button id="logout" style="float:right;margin-top:12px;margin-right: 10px;" [routerLink]="['/login']">
+                    Log Out
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class='container'>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<div class="panel panel-primary">
+
+    <div class="panel-heading">
+        {{pageTitle}}
+    </div>
+    <!-- Filter Section -->
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">Filter by Team Name:</div>
+            <div class="col-md-4"><input id="col-md-4" type='text' [(ngModel)]='listFilter' /></div>
+        </div>
+        <br />
+        <div class="table-responsive">
+            <table class='table' *ngIf='filteredMatch'>
+                <div *ngFor='let match of filteredMatch; let i = index; let iseven = even;'>
+                    <tr>
+                        <td class="outer">
+                            <div class="flip-card" *ngIf='filteredMatch'>
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <table>
+                                            <tr>
+                                                <th>{{ filteredMatch[i].team_1 }} v {{ filteredMatch[i].team_2 }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ filteredMatch[i].date }}</td>
+                                            </tr>
+                                            <tr>
+                                                <img src="../../assets/img/cricketinfo128.png" alt="Cricket Info"/>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <table>
+                                            <tr>
+                                                <th>{{ filteredMatch[i].team_1 }} v {{ filteredMatch[i].team_2 }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ filteredMatch[i].date }}</td>
+                                            </tr>
+                                            <tr *ngIf='filteredMatch[i].type && filteredMatch[i].type.length'>
+                                                <td>{{filteredMatch[i].type}}</td>
+                                            </tr>
+                                            <tr
+                                                *ngIf='filteredMatch[i].toss_winner_team && filteredMatch[i].toss_winner_team.length'>
+                                                <td><b>Toss won by: </b>{{filteredMatch[i].toss_winner_team}}</td>
+                                            </tr>
+                                            <tr
+                                                *ngIf='filteredMatch[i].winner_team && filteredMatch[i].winner_team.length'>
+                                                <td><b>Match won by:</b> {{filteredMatch[i].winner_team}}</td>
+                                            </tr>
+                                            <tr
+                                                *ngIf='filteredMatch[i].matchStarted && filteredMatch[i].matchStarted.length'>
+                                                <td><b>Match Started: </b> {{filteredMatch[i].matchStarted}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button id="watchListBtn"
+                                                        (click)='watchAndRefreshPage($event,i,filteredMatch[i])'>{{watchMatchOK(filteredMatch[i].matchId)}}
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button id="edit" (click)='getMatchDetails(i)'>Detail</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </div>
+            </table>
+        </div>
+    </div>
+</div>

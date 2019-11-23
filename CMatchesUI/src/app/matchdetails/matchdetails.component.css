@@ -1,0 +1,33 @@
+.paper-flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .paper {
+    height: 400px;
+    width: 450px;
+    background-color: rgb(72, 165, 172, 0.438);
+    text-align: left;
+    box-shadow: 0 0 20px grey;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 20px;
+  }
+
+  .paper img {
+    height: 50px;
+    width: 169px;
+  }
+  .paper-box-container {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  th {
+      padding: 10px;
+  }
+  tr {
+    padding: 10px;
+}

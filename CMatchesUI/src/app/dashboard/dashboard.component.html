@@ -1,0 +1,106 @@
+<app-header></app-header>
+<div class="outer">
+<div>
+  <nav class='navbar-default navbar-dark bg-dark'>
+      <div class='container-fluid'>
+          <!-- Navigation Bar-->
+          <ul class='nav navbar-nav'>
+              <li class="active"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+              <li><a [routerLink]="['/favlist']">Favourite List</a></li>
+
+          </ul>
+          <div class="nav navbar-nav navbar-right">
+              <p  class="navbar-text"><strong>Welcome {{userName}}</strong></p>
+              <button id="logout" style="float:right;margin-top:12px;margin-right: 10px;" [routerLink]="['/login']">
+                  Log Out
+              </button>
+          </div>
+      </div>
+  </nav>
+  <div class='container'>
+      <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+<div class="panel panel-primary">
+
+  <div class="panel-heading">
+      {{pageTitle}}
+  </div>
+  <div class="panel-body">
+      
+      <div class="row">
+            <div class="col-md-2">Filter by Team Name:</div>
+            <div class="col-md-4"><input id="col-md-4" type='text' [(ngModel)]='listFilter' /></div>
+        </div>
+
+      <div class="row">
+        <div class="col-md-4">
+            <mwl-calendar-month-view    
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            [activeDayIsOpen]="activeDayIsOpen"
+            (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+          >
+          </mwl-calendar-month-view>
+        </div>
+        <div class="col-md-8">
+            <div class="table-responsive">
+                <table class='table'
+                       *ngIf='match && match.length'>
+                    <!-- Header Section -->
+                    <thead>
+                    <tr>
+                        <th>
+                            S.No
+                        </th>
+                        <th>Team-1</th>
+                        <th>Team-2</th>
+      
+                        <th width="150px">Match Date</th>
+                        <th>Type</th>
+                        <th>Toss Winner</th>
+                        <th>Match Winner</th>
+                        <th>Match Status</th>
+      
+                    </tr>
+                    </thead>
+                    <!-- Body Section -->
+                    <tbody>
+                    <tr *ngFor='let match of filteredMatch; let i = index'>
+                        <td>
+                            {{match.id}}
+                        </td>
+                        <td>    {{ match.team_1 }}
+                        </td>
+                        <td>{{ match.team_2 }}</td>
+                        <td width="150px">{{ formatDate(match.date) }}</td>
+                        <td>{{match.type}}</td>
+                        <td>{{match.toss_winner_team}}</td>
+                        <td id="name">{{match.winner_team}}</td>
+                        <td>{{match.matchStarted}}</td>
+                        <td>
+                            <button id="watchListBtn"
+                                    (click)='watchMatch($event,i,match)'> {{watchMatchOK(match.matchId)}} </button>
+                        </td>
+                        <td >
+                          <button id="edit" (click)='getMatchDetails(i)'>Detail</button>
+                      </td>
+      
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+
+      
+  </div>
+</div>
+
+
+</div>
