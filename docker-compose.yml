@@ -1,0 +1,45 @@
+version: "3"
+services:
+
+   mysql-service:
+     image: mysql:latest
+     restart: always
+     network_mode: host
+     environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: matchdb
+     ports:
+       - '3306:3306'
+     expose:
+       - 3306
+      
+   favorite-service:
+     image: favourite
+     build:
+       context: favouriteservice/
+     restart: always
+     network_mode: host
+     ports:
+       - 8083:8083
+     depends_on:
+        - mysql-service
+
+   user-service:
+     image: userservice
+     build:
+       context: userservice/
+     restart: always
+     network_mode: host
+     ports:
+       - 8084:8084
+     depends_on:
+        - mysql-service
+
+   angular-service:
+    image: angular-image
+    build:
+      context: CMatchesUI/
+      dockerfile: Dockerfile
+    network_mode: host
+    ports:
+      - 4200:4200
